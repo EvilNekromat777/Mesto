@@ -1,0 +1,6 @@
+.popup__contaner{
+    display: flex;
+    flex-direction: column;
+    max-width: 515px;
+    width: 100%;
+}

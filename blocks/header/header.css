@@ -1,0 +1,9 @@
+.header{
+    border-bottom: 1px solid #545454;
+    margin-bottom: 40px;
+}
+@media screen and (max-width: 750px){
+    .header{
+        margin-bottom: 38px;
+    }
+}

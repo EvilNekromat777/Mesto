@@ -1,0 +1,19 @@
+.form__input-container{
+    height: 57px;
+    width: 100%;
+    border: 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    font-family: "Inter", "Arial", sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 17px;
+    color: #000000;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+.form__input-container:focus {
+    outline-color: rgba(0, 0, 255, 0.2);
+    outline-width: 1px;
+}

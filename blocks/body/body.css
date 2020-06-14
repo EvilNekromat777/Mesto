@@ -1,0 +1,10 @@
+.body{
+    background-color: #000000;
+    margin: 0;
+    padding: 0 50px 60px 50px;
+}
+@media screen and (max-width: 400px){
+    .body{
+        padding: 0 19px 36px;
+        }
+    }

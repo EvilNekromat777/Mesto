@@ -1,0 +1,14 @@
+.button__add{
+    width: 150px;
+    height: 50px;
+    margin: auto;
+    margin-right: 0;
+    border-radius: 2px;
+    background-image: url(../../../images/Vector2.png);
+}
+@media screen and (max-width: 750px){
+    .button__add{
+        margin: 36px auto;
+        width: 282px;
+    }
+}

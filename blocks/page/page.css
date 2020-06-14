@@ -1,0 +1,16 @@
+.page{
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    -webkit-text-size-adjust: 100%;
+    -ms-font-feature-settings: "kern" 1;
+    font-feature-settings: "kern";
+    max-width: 882px;
+    margin: auto;
+    padding-top: 45px;
+}
+@media screen and (max-width: 750px){
+    .page{
+        padding-top: 28px;
+    }
+}

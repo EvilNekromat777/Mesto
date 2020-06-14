@@ -1,0 +1,10 @@
+.popup__close{
+    cursor: pointer;
+    margin-left: auto;
+    width: 41px;
+    height: 41px;
+}
+.popup__close:hover{
+    opacity: 0.6;
+    transform: scale(1.2, 1.2);
+}

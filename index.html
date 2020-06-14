@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta name="author" content="Evgeniya Kireeva">
+
+    <title>Mesto</title>
+    <link rel="stylesheet" type="text/css" href="./styles/index.css" />
+</head>
+
+<body class="body">
+    <main class="page">
+        <header class="header">
+            <img class="logo" src="./images/logo.svg" alt="здесь должен быть логотип" />
+        </header>
+        <section class="profile">
+            <img class="profile__image" src="./images/image.jpg" alt="здесь должно быть фото Жак-Ив Кусто" />
+            <div class="profile__info">
+                <div class="profile__title-info">
+                    <h1 class="profile__title">Жак-Ив Кусто</h1>
+                    <button class="button button__edit button__open-popup"></button>
+                </div>
+                <h3 class="profile__subtitle">Исследователь океана</h3>
+            </div>
+            <button class="button button__add"></button>
+        </section>
+        <section class="elements">
+            <div class="element">
+                <img class="element__image" src="./images/image1.jpg" alt="здесь должно быть фото Карачаевска" />
+                <div class="element__info">
+                    <h4 class="element__title">Карачаевск</h4>
+                    <div class="element__like"></div>
+                </div>
+            </div>
+            <div class="element">
+                <img class="element__image" src="./images/image2.jpg" alt="здесь должно быть фото горы Эльбрус" />
+                <div class="element__info">
+                    <h4 class="element__title">Гора Эльбрус</h4>
+                    <div class="element__like"></div>
+                </div>
+            </div>
+            <div class="element">
+                <img class="element__image" src="./images/image3.jpg" alt="здесь должно быть фото Домбай" />
+                <div class="element__info">
+                    <h4 class="element__title">Домбай</h4>
+                    <div class="element__like"></div>
+                </div>
+            </div>
+            <div class="element">
+                <img class="element__image" src="./images/image2.jpg" alt="здесь должно быть фото горы Эльбрус" />
+                <div class="element__info">
+                    <h4 class="element__title">Гора Эльбрус</h4>
+                    <div class="element__like"></div>
+                </div>
+            </div>
+            <div class="element">
+                <img class="element__image" src="./images/image3.jpg" alt="здесь должно быть фото Домбай" />
+                <div class="element__info">
+                    <h4 class="element__title">Домбай</h4>
+                    <div class="element__like"></div>
+                </div>
+            </div>
+            <div class="element">
+                <img class="element__image" src="./images/image1.jpg" alt="здесь должно быть фото Карачаевска" />
+                <div class="element__info">
+                    <h4 class="element__title">Карачаево-Черкесск</h4>
+                    <div class="element__like"></div>
+                </div>
+            </div>
+        </section>
+        <footer class="footer">
+            <p class="footer__copyright">&copy; 2020 Mesto Russia</p>
+        </footer>
+    </main>
+    <section class="popup">
+        <div class="popup__contaner">
+            <img class="popup__close" src="./images/Close Icon.png">
+            <div class="popup__content">
+                <h2 class="popup__title">Редактировать профиль</h2>
+                <div class="form__container">
+                    <form class="form">
+                        <fieldset class="form__fieldset">
+                            <input type="text" name="name" class="form__input-container form__input-container_name"
+                                placeholder="Имя">
+                            <input type="text" name="job" class="form__input-container form__input-container_job"
+                                placeholder="О себе">
+                        </fieldset>
+
+
+                        <button class="button popup__submit">Сохранить</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+<script type="text/javascript" src='./scripts/index.js'></script>
+
+</html>
