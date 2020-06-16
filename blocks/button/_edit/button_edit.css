@@ -1,0 +1,14 @@
+.button_edit{
+    width: 24px;
+    height: 24px;
+    margin-top: 19px;
+    background-image: url(../../../images/Vector.png);
+}
+@media screen and (max-width: 750px){
+    .button_edit{
+    width: 18px;
+    height: 18px;
+    margin-left: 5px;
+    margin-top: 21px;
+    }
+}

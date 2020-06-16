@@ -1,6 +1,6 @@
-@import url(./__add/button__add.css);
-@import url(./__edit/button__edit.css);
-@import url(./__open-popup/button__open-popup.css);
+@import url(./_add/button_add.css);
+@import url(./_edit/button_edit.css);
+@import url(./_open-popup/button_open-popup.css);
 .button{
     opacity: 1;
     border: 1px solid #FFFFFF;

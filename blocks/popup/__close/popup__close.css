@@ -3,8 +3,11 @@
     margin-left: auto;
     width: 41px;
     height: 41px;
+    border: 0;
+    background-image: url(../../../images/Close-Icon.png);
+    background-color: transparent;
+    background-position: center;
 }
 .popup__close:hover{
     opacity: 0.6;
-    transform: scale(1.2, 1.2);
 }

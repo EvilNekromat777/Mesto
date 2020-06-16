@@ -4,3 +4,8 @@
     max-width: 515px;
     width: 100%;
 }
+@media screen and (max-width: 500px){
+    .popup__contaner{
+        margin: 0 35px;
+        }
+    }
