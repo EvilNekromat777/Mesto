@@ -10,7 +10,7 @@ let job = profile.querySelector('.profile__subtitle');
 
 
 let popupToggle = function () {
-    if (popup.classList.contains('popup_opened')); {
+    if (popup.classList.contains('popup_opened') === false) {
         nameInput.value = name.textContent;
         jobInput.value = job.textContent;
     }
