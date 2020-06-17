@@ -8,16 +8,19 @@ let jobInput = formElement.querySelector('.form__input-container_job');
 let name = profile.querySelector('.profile__title');
 let job = profile.querySelector('.profile__subtitle');
 
+
 let popupToggle = function () {
-    popup.classList.toggle('popup_opened')
-    nameInput.value = name.textContent
-    jobInput.value = job.textContent
+    if (popup.classList.contains('popup_opened')); {
+        nameInput.value = name.textContent;
+        jobInput.value = job.textContent;
+    }
+    popup.classList.toggle('popup_opened');
 }
 
 function formSubmitHandler(evt) {
     evt.preventDefault();
-    name.textContent = nameInput.value
-    job.textContent = jobInput.value
+    name.textContent = nameInput.value;
+    job.textContent = jobInput.value;
     popupToggle();
 }
 

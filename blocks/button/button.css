@@ -1,6 +1,7 @@
-@import url(./_add/button_add.css);
+
 @import url(./_edit/button_edit.css);
 @import url(./_open-popup/button_open-popup.css);
+
 .button{
     opacity: 1;
     border: 1px solid #FFFFFF;
@@ -12,3 +13,4 @@
 .button:hover{
     opacity: 0.6;
 }
+
