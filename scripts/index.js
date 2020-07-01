@@ -73,8 +73,19 @@ function addCard(item) {
     card.querySelector('.element__image').setAttribute("src", item.link);
     card.querySelector('.element__image').setAttribute("alt", item.alt);
     cardsListElement.prepend(card);
-}
 
+    const like = document.querySelector('.element__like')
+    like.addEventListener('click', function (evt) {
+        evt.target.classList.toggle('element__like_theme_dark');
+    });
+
+
+}
 initialCards.forEach(function (item) {
     addCard(item);
 });
+
+
+
+
+

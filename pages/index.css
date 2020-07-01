@@ -19,8 +19,18 @@
     margin: 0;
 }
 
-
-
+.element__like_theme_dark{
+    background-image: url(../../../images/like2.jpg);
+}
+.popup_edit{
+    background: pink;
+}
+.popup_add{
+    background: green;
+}
+.popup_image{
+    background: red;
+}
 
 
 
