@@ -3,7 +3,11 @@
     width: 21px;
     height: 18px;
     border: 0;
+    outline: none; 
+    background-color: transparent;
+    
+
 }
 .element__like:hover{
-    transform: scale(1.2, 1.2);
+    opacity: 0.6;
 }
