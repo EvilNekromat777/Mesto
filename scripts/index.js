@@ -74,13 +74,16 @@ const cardsTemplateElement = document.querySelector('.cards-template');
 const formAdd = document.querySelector('.form_addCard');
 const nameInputCard = formAdd.querySelector('.form__input-container_addCard_name') // эту переменную лучше объявить сразу после addForm
 const linkInput = formAdd.querySelector('.form__input-container_addCard_link') // сделать по аналогии с linkInput
-
+const listItemCard = document.createElement('li');
 //const addForm = ... // это у вас уже написано должно быть
 //const linkInput = addForm.querySelector(...) // эту переменную лучше объявить сразу после addForm
 //const nameInput = addForm.querySelector(...) // сделать по аналогии с linkInput
 
 function addCard(item) {
     const card = cardsTemplateElement.content.cloneNode(true);
+    //слушатель - при нажатии на иконку корзины, сработает функция deleteCard
+    card.querySelector('.element__delete').addEventListener('click', deleteCard);
+
     card.querySelector('.element__title').textContent = item.name;
     card.querySelector('.element__image').setAttribute("src", item.link);
     card.querySelector('.element__image').setAttribute("alt", item.alt);
@@ -95,7 +98,7 @@ initialCards.forEach(function (item) {
     addCard(item);
 });
 
-
+//функция добавления новых карточек
 //функцияКотораяСработаетПослеНажатияНаКнопкуФормы
 function renderCard(evt) {
     //останавливаемСтандартноеПоведениеБраузера
@@ -161,4 +164,13 @@ popupImageClose.addEventListener('click', function () {
 //const popupImage = popup.querySelector('.popup_image'); - эта переменная уже создавалась выше
 const popupImageImg = document.querySelector('.popup-image__img');
 const popupImageText = document.querySelector('.popup-image__text');
-console.log(popupImage, popupImageImg, popupImageText);
+
+
+
+//функция удаления карточки
+function deleteCard(e) {
+    //добавляем event на карточку, чтобы отслеживать клик по любой рандомной карточке
+    const card = e.target.closest('.element');
+    //когда event отследит клик, он должен  удалить карточку, по которой он был сделан
+    card.remove();
+}
