@@ -1,0 +1,6 @@
+.popup__zoom-contaner{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+}

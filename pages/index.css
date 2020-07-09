@@ -14,49 +14,12 @@
 @import url(../blocks/popup/_opened/popup_opened.css);
 @import url(../blocks/profile/profile.css);
 
-.card-list{
-    list-style-type: none;
-    margin: 0;
-}
 
-.element__like_theme_dark{
-    background-image: url(../../../images/like2.jpg);
-}
-.popup_edit{
-    
-}
-.popup_add{
-    
-}
-.popup_image{
-    
-}
 
-.popup__title_add.popup__title_add{
-    text-align: start;
-}
-.element__delete{
-    background-color: transparent;
-    background-image: url(../../../images/delete.png);
-    position: absolute;
-    top: 18px;
-    right: 15px;
-    border: none;
-    opacity: 1;
-    width: 18px;
-    height: 20px;
-}
-.element__delete:hover{
-    opacity: 0.6;
-}
-.popup-image__img{
-    max-width: 75vw;
-    max-height: 75vh;
-    background: greenyellow;
-}
-.popup__contaner_image{
-    max-width: 860px;
-}
+
+
+
+
 
 
 

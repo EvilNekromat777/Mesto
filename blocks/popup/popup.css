@@ -1,8 +1,16 @@
+
 @import url(./__close/popup__close.css);
 @import url(./__contaner/popup__contaner.css);
 @import url(./__content/popup__content.css);
 @import url(./__submit/popup__submit.css);
 @import url(./__title/popup__title.css);
+@import url(./__zoom-image/popup__zoom-image.css);
+@import url(./__zoom-contaner/popup__zoom-contaner.css);
+@import url(./__zoom-title/popup__zoom-title.css);
+@import url(./__close_image/popup__close_image.css);
+@import url(./_image/popup_image.css);
+@import url(./__title/_add/popup__title_add.css);
+
 
 
 .popup{
