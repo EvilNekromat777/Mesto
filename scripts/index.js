@@ -13,6 +13,21 @@ const linkInput = formAdd.querySelector('.form__input-container_addCard_link');
 const popupImageImg = document.querySelector('.popup__zoom-image');
 const popupImageText = document.querySelector('.popup__zoom-title');
 
+// Popups
+const popupEdit = document.querySelector('.popup_edit');
+const popupAdd = document.querySelector('.popup_add');
+const popupImage = document.querySelector('.popup_image');
+
+// Popups Close Button
+const popupEditClose = popupEdit.querySelector('.popup__close');
+const popupAddClose = popupAdd.querySelector('.popup__close');
+const popupImageClose = popupImage.querySelector('.popup__close');
+
+// Popups Open Button
+const popupEditOpen = document.querySelector('.button_edit_open');
+const popupAddOpen = document.querySelector('.button_add_open');
+const popupImageOpen = document.querySelector('.element__image');
+
 
 const togglePopup = function (popup) {
     popup.classList.toggle('popup_opened')
@@ -72,7 +87,7 @@ function formSubmitHandler(evt) {
 //слушатель - при нажатии на кнопку "Сохранить", срабатывает функция formSubmitHandler
 formElement.addEventListener('submit', formSubmitHandler);
 
-//функция добавления карточек через JS
+//функция создания карточек через JS
 function addCard(item) {
     //копируем все содержимое Template 
     const card = cardsTemplateElement.content.cloneNode(true);
@@ -81,7 +96,7 @@ function addCard(item) {
     card.querySelector('.element__delete').addEventListener('click', deleteCard);
 
     //слушатель - при нажатии на картинку, сработает функция popupZoomImage
-    card.querySelector('.element__image').addEventListener('click', function () { popupZoomImage(item) });
+    card.querySelector('.element__image').addEventListener('click', () => popupZoomImage(item));
 
     //берем данные из массива
     card.querySelector('.element__title').textContent = item.name;
@@ -91,16 +106,15 @@ function addCard(item) {
     cardsListElement.prepend(card);
 
     const like = document.querySelector('.element__like');
-    like.addEventListener('click', function (evt) {
-        evt.target.classList.toggle('element__like_theme_dark')
-    });
+    like.addEventListener('click', evt => evt.target.classList.toggle('element__like_theme_dark')
+    );
 }
 initialCards.forEach(function (item) {
     addCard(item)
 });
 
+
 //функция добавления новых карточек
-//функцияКотораяСработаетПослеНажатияНаКнопкуФормы
 function renderCard(evt) {
     //останавливаемСтандартноеПоведениеБраузера
     evt.preventDefault()
@@ -114,46 +128,26 @@ function renderCard(evt) {
     addCard(newCard);
     //закрываемПопап()
     togglePopup(popupAdd);
-
 }
 
-// Popups
-const popupEdit = document.querySelector('.popup_edit');
-const popupAdd = document.querySelector('.popup_add');
-const popupImage = document.querySelector('.popup_image');
 
-// Popups Close Button
-const popupEditClose = popupEdit.querySelector('.popup__close');
-const popupAddClose = popupAdd.querySelector('.popup__close');
-const popupImageClose = popupImage.querySelector('.popup__close');
-
-// Popups Open Button
-const popupEditOpen = document.querySelector('.button_edit_open');
-const popupAddOpen = document.querySelector('.button_add_open');
-const popupImageOpen = document.querySelector('.element__image');
 
 //слушатель: при нажатии на кнопку сработает функция renderCard
 formAdd.addEventListener('submit', renderCard);
 
-popupEditOpen.addEventListener('click', function () {
+popupEditOpen.addEventListener('click', () => {
     nameInput.value = name.textContent;
     jobInput.value = job.textContent;
     togglePopup(popupEdit)
 });
-popupAddOpen.addEventListener('click', function () {
+popupAddOpen.addEventListener('click', () => {
     togglePopup(popupAdd);
     nameInputCard.value = '';
     linkInput.value = '';
 });
-popupEditClose.addEventListener('click', function () {
-    togglePopup(popupEdit)
-});
-popupAddClose.addEventListener('click', function () {
-    togglePopup(popupAdd)
-});
-popupImageClose.addEventListener('click', function () {
-    togglePopup(popupImage)
-});
+popupEditClose.addEventListener('click', () => togglePopup(popupEdit));
+popupAddClose.addEventListener('click', () => togglePopup(popupAdd));
+popupImageClose.addEventListener('click', () => togglePopup(popupImage));
 
 //функция удаления карточки
 function deleteCard(e) {
