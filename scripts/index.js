@@ -15,10 +15,6 @@ const popupImageText = document.querySelector('.popup__zoom-title');
 
 
 const togglePopup = function (popup) {
-    if (popup.classList.contains('popup_opened') === false) {
-        nameInput.value = name.textContent;
-        jobInput.value = job.textContent;
-    }
     popup.classList.toggle('popup_opened')
 };
 
@@ -57,6 +53,10 @@ const initialCards = [
 
 //функция закрытия первого попапа (где меняем имя пользователя)
 const toggleUserPopup = function () {
+    if (popup.classList.contains('popup_opened') === false) {
+        nameInput.value = name.textContent;
+        jobInput.value = job.textContent;
+    }
     popup.classList.toggle('popup_opened');
 }
 
@@ -136,6 +136,8 @@ const popupImageOpen = document.querySelector('.element__image');
 formAdd.addEventListener('submit', renderCard);
 
 popupEditOpen.addEventListener('click', function () {
+    nameInput.value = name.textContent;
+    jobInput.value = job.textContent;
     togglePopup(popupEdit)
 });
 popupAddOpen.addEventListener('click', function () {
