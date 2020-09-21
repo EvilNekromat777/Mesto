@@ -88,47 +88,68 @@ function formSubmitHandler(evt) {
 formElement.addEventListener('submit', formSubmitHandler);
 
 
-//функция создания карточек через JS
-function addCard(item) {
-    //копируем все содержимое Template 
-    const card = cardsTemplateElement.content.cloneNode(true);
+// // //функция создания карточек через JS
+//  function addCard(item) {
+// //     //копируем все содержимое Template 
+//   const card = cardsTemplateElement.content.cloneNode(true);
 
+// //     //слушатель - при нажатии на иконку корзины, сработает функция deleteCard (удаление карточки)
+//    card.querySelector('.element__delete').addEventListener('click', deleteCard);
+
+//      //слушатель - при нажатии на картинку, сработает функция popupZoomImage (увеличение картинки в попапе)
+//     card.querySelector('.element__image').addEventListener('click', () => popupZoomImage(item));
+
+//      //берем данные из массива
+//      card.querySelector('.element__title').textContent = item.name;
+//      card.querySelector('.element__image').setAttribute("src", item.link);
+//      card.querySelector('.element__image').setAttribute("alt", item.alt);
+
+//      //говорим, что хотим добавить карточку в начало, а не в конец
+//      cardsListElement.prepend(card);
+//      //ставим карточкам лайки
+//      const like = document.querySelector('.element__like');
+//     like.addEventListener('click', evt => evt.target.classList.toggle('element__like_theme_dark')
+//      );
+//  }
+//  initialCards.forEach(function (item) {
+//      addCard(item)
+// });
+
+
+//Отдельно функция создания карточки:
+function createCard(item) {
+    // копируем все содержимое Template
+    const card = cardsTemplateElement.content.cloneNode(true);
     //слушатель - при нажатии на иконку корзины, сработает функция deleteCard (удаление карточки)
     card.querySelector('.element__delete').addEventListener('click', deleteCard);
-
     //слушатель - при нажатии на картинку, сработает функция popupZoomImage (увеличение картинки в попапе)
     card.querySelector('.element__image').addEventListener('click', () => popupZoomImage(item));
-
     //берем данные из массива
     card.querySelector('.element__title').textContent = item.name;
     card.querySelector('.element__image').setAttribute("src", item.link);
     card.querySelector('.element__image').setAttribute("alt", item.alt);
+    //возвращаем созданную карточку
+    return card;
+}
 
-    //говорим, что хотим добавить карточку в начало, а не в конец
+//И отдельно функция добавления карточки в контейнер
+function addCard(cardsListElement, card) {
+    //добавление карточки в начало списка
     cardsListElement.prepend(card);
     //ставим карточкам лайки
     const like = document.querySelector('.element__like');
-    like.addEventListener('click', evt => evt.target.classList.toggle('element__like_theme_dark')
-    );
-}
+    like.addEventListener('click', evt => evt.target.classList.toggle('element__like_theme_dark'))
+};
 initialCards.forEach(function (item) {
-    addCard(item)
+    createCard(item);
+    addCard(cardsListElement, createCard(item));
 });
-
-
-
-
-
-
-
 
 
 //функция добавления новых карточек
 function renderCard(evt) {
-
     //останавливаемСтандартноеПоведениеБраузера
     evt.preventDefault()
-
     //const имяНовойКарточки = беремЗначениеИзПоляА
     const newCardName = nameInputCard.value;
     //const картинкаНовойКарточки = беремЗначениеИзПоляБ
@@ -136,12 +157,10 @@ function renderCard(evt) {
     //const новаяКарточка = { name: имяНовойКарточки, link: картинкаНовойКарточки }
     const newCard = { name: newCardName, link: newCardImage };
     //функцияКотораяСоздаетКарточку(новаяКарточка)
-    addCard(newCard);
+    addCard(cardsListElement, createCard(newCard));
     //закрываемПопап()
     togglePopup(popupAdd);
 }
-
-
 
 //слушатель: при нажатии на кнопку сработает функция renderCard
 formAdd.addEventListener('submit', renderCard);
