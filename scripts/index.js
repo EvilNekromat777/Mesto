@@ -66,13 +66,11 @@ const initialCards = [
     }
 ];
 
-//функция закрытия первого попапа (где меняем имя пользователя)
-const toggleUserPopup = function () {
-    if (popup.classList.contains('popup_opened') === false) {
-        nameInput.value = name.textContent;
-        jobInput.value = job.textContent;
-    }
-    popup.classList.toggle('popup_opened');
+//функция открытия первого попапа (где меняем имя пользователя)
+const openUserPopup = function () {
+    nameInput.value = name.textContent;
+    jobInput.value = job.textContent;
+    togglePopup(popupEdit);
 }
 
 //Функция сохранения изменений в первом попапе:
@@ -82,7 +80,7 @@ function formSubmitHandler(evt) {
     evt.preventDefault();
     name.textContent = nameInput.value;
     job.textContent = jobInput.value;
-    toggleUserPopup();
+    togglePopup(popupEdit);
 }
 //слушатель - при нажатии на кнопку "Сохранить", срабатывает функция formSubmitHandler
 formElement.addEventListener('submit', formSubmitHandler);
@@ -124,6 +122,8 @@ function createCard(item) {
     card.querySelector('.element__delete').addEventListener('click', deleteCard);
     //слушатель - при нажатии на картинку, сработает функция popupZoomImage (увеличение картинки в попапе)
     card.querySelector('.element__image').addEventListener('click', () => popupZoomImage(item));
+    //ставим карточкам лайки
+    card.querySelector('.element__like').addEventListener('click', evt => evt.target.classList.toggle('element__like_theme_dark'));
     //берем данные из массива
     card.querySelector('.element__title').textContent = item.name;
     card.querySelector('.element__image').setAttribute("src", item.link);
@@ -136,9 +136,6 @@ function createCard(item) {
 function addCard(cardsListElement, card) {
     //добавление карточки в начало списка
     cardsListElement.prepend(card);
-    //ставим карточкам лайки
-    const like = document.querySelector('.element__like');
-    like.addEventListener('click', evt => evt.target.classList.toggle('element__like_theme_dark'))
 };
 initialCards.forEach(function (item) {
     createCard(item);
@@ -175,7 +172,7 @@ popupAddOpen.addEventListener('click', () => {
     nameInputCard.value = '';
     linkInput.value = '';
 });
-popupEditClose.addEventListener('click', () => togglePopup(popupEdit));
+popupEditClose.addEventListener('click', () => openUserPopup(popupEdit));
 popupAddClose.addEventListener('click', () => togglePopup(popupAdd));
 popupImageClose.addEventListener('click', () => togglePopup(popupImage));
 
