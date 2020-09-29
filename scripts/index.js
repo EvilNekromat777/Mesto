@@ -163,15 +163,40 @@ function renderCard(evt) {
 formAdd.addEventListener('submit', renderCard);
 
 popupEditOpen.addEventListener('click', () => {
+    const nameProfileError = document.getElementById(`nameProfile-error`);
+    const jobProfileError = document.getElementById(`jobProfile-error`);
+    nameProfileError.textContent = '';
+    jobProfileError.textContent = '';
+    nameInput.classList.remove('form__error_active');
+    jobInput.classList.remove('form__error_active');
+
+
+    const buttonElement = document.querySelector('.popup__submit');
+    buttonElement.classList.remove('popup__submit_inactive')
+    buttonElement.removeAttribute('disabled', true)
+
     nameInput.value = name.textContent;
     jobInput.value = job.textContent;
     togglePopup(popupEdit);
 });
+
 popupAddOpen.addEventListener('click', () => {
+    const nameCardError = document.getElementById(`nameCard-error`);
+    const linkCardError = document.getElementById(`linkCard-error`);
+    nameCardError.textContent = '';
+    linkCardError.textContent = '';
+    nameInput.classList.remove('form__error_active');
+    linkInput.classList.remove('form__error_active');
+
     togglePopup(popupAdd);
     nameInputCard.value = '';
     linkInput.value = '';
+
+    // const buttonElement = document.querySelector('.popup__submit'); // находим кнопку
+    // buttonElement.classList.add('popup__submit_inactive'); // добавляем кнопке класс inactive
+
 });
+
 popupEditClose.addEventListener('click', () => openUserPopup(popupEdit));
 popupAddClose.addEventListener('click', () => togglePopup(popupAdd));
 popupImageClose.addEventListener('click', () => togglePopup(popupImage));
@@ -194,95 +219,6 @@ function popupZoomImage(item) {
 
     togglePopup(popupImage)
 };
-
-
-
-// //создаем объект валидации
-// const objValid = {
-//     formSelector: '.form',
-//     inputSelector: '.form__input-container',
-//     submitButtonSelector: '.button',
-//     errorClass: 'form__error_active'
-// }
-// enableValidation(objValid);
-
-
-// //создаем функцию валидации
-// function enableValidation({ formSelector, inputSelector, submitButtonSelector, errorClass }) {
-//     //** ОТДЕЛЬНАЯ ФУНКЦИЯ: Действие запуска процесса наложения валидаций
-//     const forms = document.querySelectorAll(formSelector);
-//     forms.forEach(
-//         form => {
-//             //прописываем обработчик для каждой формы, чтобы страница не перезагружалась каждый раз при нажатии на Submit
-//             form.addEventListener('submit', evt => evt.prependDefauld());//останавливаем стандартное поведение браузера при нажатии на Submit
-
-//             //** ОТДЕЛЬНАЯ ФУНКЦИЯ: Действие наложения обработчиков на поля форм
-//             const inputs = form.querySelectorAll(inputSelector);
-//             inputs.forEach(
-//                 input => {
-//                     input.addEventListener('input', evt => {
-//                         //** ОТДЕЛЬНАЯ ФУНКЦИЯ: проверка валидности введенных данных
-//                         if (input.validity.valid) {
-//                             //** ОТДЕЛЬНАЯ ФУНКЦИЯ: если поле валидное - скрыть ошибку под полем
-
-//                             //** ЕЩЕ ОДНА ОТДЕЛЬНАЯ ФУНКЦИЯ: поиск  errorNameProfile
-//                             const inputNameProfile = input.getAttribute('name');
-//                             const errorNameProfile = document.getElementById('nameProfile-error');
-
-//                             errorNameProfile.textContent = input.validationMessage
-//                             errorNameProfile.classList.remove(errorClass)
-
-//                             const inputJobProfile = input.getAttribute('job');
-//                             const errorJobProfile = document.getElementById('jobProfile-error');
-
-//                             errorJobProfile.textContent = input.validationMessage
-//                             errorJobProfile.classList.remove(errorClass)
-
-//                         } else {
-//                             //** ОТДЕЛЬНАЯ ФУНКЦИЯ: если поле не валидное - показать ошибку под полем
-
-//                             //** ЕЩЕ ОДНА ОТДЕЛЬНАЯ ФУНКЦИЯ: поиск  errorNameProfile
-
-
-//                             const inputJobProfile = input.getAttribute('job');
-//                             const errorJobProfile = document.getElementById('jobProfile-error');
-//                             const inputNameProfile = input.getAttribute('name');
-//                             const errorNameProfile = document.getElementById('nameProfile-error');
-
-//                             errorNameProfile.textContent = input.validationMessage
-//                             errorNameProfile.classList.add(errorClass)
-
-
-
-//                             errorJobProfile.textContent = input.validationMessage
-//                             errorJobProfile.classList.add(errorClass)
-
-//                         }
-//                     }
-
-//                     )
-//                 }
-//             )
-//         }
-//     )
-// }
-
-
-// //** ОТДЕЛЬНАЯ ФУНКЦИЯ: Действие запуска процесса наложения валидаций
-// //** ОТДЕЛЬНАЯ ФУНКЦИЯ: Действие наложения обработчиков на поля форм
-// //** ОТДЕЛЬНАЯ ФУНКЦИЯ: проверка валидности введенных данных
-// //** ОТДЕЛЬНАЯ ФУНКЦИЯ: если поле валидное - скрыть ошибку под полем
-// //** ОТДЕЛЬНАЯ ФУНКЦИЯ: если поле не валидное - показать ошибку под полем
-// //** ЕЩЕ ОДНА ОТДЕЛЬНАЯ ФУНКЦИЯ: поиск  errorNameProfile
-
-// //** ОТДЕЛЬНАЯ ФУНКЦИЯ: функция валидности кнопки
-
-
-
-// //ФУНКЦИЯ: поиск  errorNameProfile
-// function addClass() {
-
-// };
 
 
 // функция "Показать ошибку"
@@ -312,21 +248,32 @@ const checkInputValidity = (formElement, inputElement) => {
     }
 }
 
+//функция для кнопки
+const toggleButtonState = (inputList, buttonElement) => {
+    const hasInvalidInput = inputList.some(
+        (inputElement) => !inputElement.validity.valid // проверяем инпуты, валидны или нет
+    );
+    if (hasInvalidInput) {
+        buttonElement.classList.add('popup__submit_inactive');
+        buttonElement.setAttribute('disabled', true);  //если хотя бы один инпут не валидный, тогда кнопка не активна и на нее падает класс: popup__submit_inactive
+    } else {
+        buttonElement.classList.remove('popup__submit_inactive');
+        buttonElement.removeAttribute('disabled', true);
+    }
+};
 
 //функция, которая устанавливает обработчики событий
 const setEventListeners = (formElement) => {
     const inputList = Array.from(formElement.querySelectorAll('.form__input-container')); // находим все инпуты
+    const buttonElement = formElement.querySelector('.popup__submit');
 
     inputList.forEach((inputElement) => {
         inputElement.addEventListener('input', () => {
             checkInputValidity(formElement, inputElement);
+            toggleButtonState(inputList, buttonElement);
         });
     });
 };
-
-const toggleButtonState = () => {
-
-}
 
 //создаем функцию валидации
 const enableValidation = () => {
