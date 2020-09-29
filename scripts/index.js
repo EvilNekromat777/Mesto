@@ -30,7 +30,7 @@ const popupImageOpen = document.querySelector('.element__image');
 
 
 const togglePopup = function (popup) {
-    popup.classList.toggle('popup_opened')
+    popup.classList.toggle('popup_opened');
 };
 
 const initialCards = [
@@ -165,7 +165,7 @@ formAdd.addEventListener('submit', renderCard);
 popupEditOpen.addEventListener('click', () => {
     nameInput.value = name.textContent;
     jobInput.value = job.textContent;
-    togglePopup(popupEdit)
+    togglePopup(popupEdit);
 });
 popupAddOpen.addEventListener('click', () => {
     togglePopup(popupAdd);
@@ -194,3 +194,152 @@ function popupZoomImage(item) {
 
     togglePopup(popupImage)
 };
+
+
+
+// //создаем объект валидации
+// const objValid = {
+//     formSelector: '.form',
+//     inputSelector: '.form__input-container',
+//     submitButtonSelector: '.button',
+//     errorClass: 'form__error_active'
+// }
+// enableValidation(objValid);
+
+
+// //создаем функцию валидации
+// function enableValidation({ formSelector, inputSelector, submitButtonSelector, errorClass }) {
+//     //** ОТДЕЛЬНАЯ ФУНКЦИЯ: Действие запуска процесса наложения валидаций
+//     const forms = document.querySelectorAll(formSelector);
+//     forms.forEach(
+//         form => {
+//             //прописываем обработчик для каждой формы, чтобы страница не перезагружалась каждый раз при нажатии на Submit
+//             form.addEventListener('submit', evt => evt.prependDefauld());//останавливаем стандартное поведение браузера при нажатии на Submit
+
+//             //** ОТДЕЛЬНАЯ ФУНКЦИЯ: Действие наложения обработчиков на поля форм
+//             const inputs = form.querySelectorAll(inputSelector);
+//             inputs.forEach(
+//                 input => {
+//                     input.addEventListener('input', evt => {
+//                         //** ОТДЕЛЬНАЯ ФУНКЦИЯ: проверка валидности введенных данных
+//                         if (input.validity.valid) {
+//                             //** ОТДЕЛЬНАЯ ФУНКЦИЯ: если поле валидное - скрыть ошибку под полем
+
+//                             //** ЕЩЕ ОДНА ОТДЕЛЬНАЯ ФУНКЦИЯ: поиск  errorNameProfile
+//                             const inputNameProfile = input.getAttribute('name');
+//                             const errorNameProfile = document.getElementById('nameProfile-error');
+
+//                             errorNameProfile.textContent = input.validationMessage
+//                             errorNameProfile.classList.remove(errorClass)
+
+//                             const inputJobProfile = input.getAttribute('job');
+//                             const errorJobProfile = document.getElementById('jobProfile-error');
+
+//                             errorJobProfile.textContent = input.validationMessage
+//                             errorJobProfile.classList.remove(errorClass)
+
+//                         } else {
+//                             //** ОТДЕЛЬНАЯ ФУНКЦИЯ: если поле не валидное - показать ошибку под полем
+
+//                             //** ЕЩЕ ОДНА ОТДЕЛЬНАЯ ФУНКЦИЯ: поиск  errorNameProfile
+
+
+//                             const inputJobProfile = input.getAttribute('job');
+//                             const errorJobProfile = document.getElementById('jobProfile-error');
+//                             const inputNameProfile = input.getAttribute('name');
+//                             const errorNameProfile = document.getElementById('nameProfile-error');
+
+//                             errorNameProfile.textContent = input.validationMessage
+//                             errorNameProfile.classList.add(errorClass)
+
+
+
+//                             errorJobProfile.textContent = input.validationMessage
+//                             errorJobProfile.classList.add(errorClass)
+
+//                         }
+//                     }
+
+//                     )
+//                 }
+//             )
+//         }
+//     )
+// }
+
+
+// //** ОТДЕЛЬНАЯ ФУНКЦИЯ: Действие запуска процесса наложения валидаций
+// //** ОТДЕЛЬНАЯ ФУНКЦИЯ: Действие наложения обработчиков на поля форм
+// //** ОТДЕЛЬНАЯ ФУНКЦИЯ: проверка валидности введенных данных
+// //** ОТДЕЛЬНАЯ ФУНКЦИЯ: если поле валидное - скрыть ошибку под полем
+// //** ОТДЕЛЬНАЯ ФУНКЦИЯ: если поле не валидное - показать ошибку под полем
+// //** ЕЩЕ ОДНА ОТДЕЛЬНАЯ ФУНКЦИЯ: поиск  errorNameProfile
+
+// //** ОТДЕЛЬНАЯ ФУНКЦИЯ: функция валидности кнопки
+
+
+
+// //ФУНКЦИЯ: поиск  errorNameProfile
+// function addClass() {
+
+// };
+
+
+// функция "Показать ошибку"
+const showInputError = (formElement, inputElement, errorMessage) => {
+    const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
+    errorElement.textContent = errorMessage;
+    errorElement.classList.add('form__error_active');
+
+}
+
+// функция "Скрыть ошибку"
+const hideInputError = (formElement, inputElement) => {
+    const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
+    errorElement.textContent = '';
+    errorElement.classList.remove('form__error_active');
+}
+
+// функция будет показывать и убирать ошибку
+const checkInputValidity = (formElement, inputElement) => {
+    const isInputValid = inputElement.validity.valid
+
+    if (!isInputValid) {
+        const errorMessage = inputElement.validationMessage;
+        showInputError(formElement, inputElement, errorMessage);
+    } else {
+        hideInputError(formElement, inputElement);
+    }
+}
+
+
+//функция, которая устанавливает обработчики событий
+const setEventListeners = (formElement) => {
+    const inputList = Array.from(formElement.querySelectorAll('.form__input-container')); // находим все инпуты
+
+    inputList.forEach((inputElement) => {
+        inputElement.addEventListener('input', () => {
+            checkInputValidity(formElement, inputElement);
+        });
+    });
+};
+
+const toggleButtonState = () => {
+
+}
+
+//создаем функцию валидации
+const enableValidation = () => {
+    const formList = Array.from(document.querySelectorAll('.form')); // находим все формы в документе
+
+    //прописываем обработчик для каждой формы, чтобы страница не перезагружалась каждый раз при нажатии на Submit
+    formList.forEach((formElement) => {
+        formElement.addEventListener('submit', (event) => {
+            event.preventDefault(); //останавливаем стандартное поведение браузера при нажатии на Submit
+        });
+
+        setEventListeners(formElement);
+    });
+};
+
+enableValidation();
