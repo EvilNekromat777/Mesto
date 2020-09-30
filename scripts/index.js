@@ -33,6 +33,8 @@ const togglePopup = function (popup) {
     popup.classList.toggle('popup_opened');
 };
 
+
+
 const initialCards = [
     {
         name: 'Архыз',
@@ -86,32 +88,52 @@ function formSubmitHandler(evt) {
 formElement.addEventListener('submit', formSubmitHandler);
 
 
-// // //функция создания карточек через JS
-//  function addCard(item) {
-// //     //копируем все содержимое Template 
-//   const card = cardsTemplateElement.content.cloneNode(true);
+// Закрытие попапа на Esc
+function closePopup(popup) {
+    popup.classList.remove('popup_opened');
+}
+function keyHandler(evt, popup) {
+    if (evt.key === 'Escape') {
+        closePopup(popup);
+    }
+}
+document.addEventListener('keydown', function (evt) {
+    keyHandler(evt, popupAdd);
+});
+document.addEventListener('keydown', function (evt) {
+    keyHandler(evt, popupEdit);
+});
+document.addEventListener('keydown', function (evt) {
+    keyHandler(evt, popupImage);
+});
 
-// //     //слушатель - при нажатии на иконку корзины, сработает функция deleteCard (удаление карточки)
-//    card.querySelector('.element__delete').addEventListener('click', deleteCard);
+// Закрытие на оверлей первого попапа 
+const popupEditCloseByClickOnOverlay = (event) => {
+    if (event.target != event.currentTarget) {
+        return
+    }
+    togglePopup(popupEdit);
+}
+popupEdit.addEventListener('click', popupEditCloseByClickOnOverlay)
 
-//      //слушатель - при нажатии на картинку, сработает функция popupZoomImage (увеличение картинки в попапе)
-//     card.querySelector('.element__image').addEventListener('click', () => popupZoomImage(item));
+// Закрытие на оверлей второго попапа
+const popupAddCloseByClickOnOverlay = (event) => {
+    if (event.target != event.currentTarget) {
+        return
+    }
+    togglePopup(popupAdd);
+}
+popupAdd.addEventListener('click', popupAddCloseByClickOnOverlay)
 
-//      //берем данные из массива
-//      card.querySelector('.element__title').textContent = item.name;
-//      card.querySelector('.element__image').setAttribute("src", item.link);
-//      card.querySelector('.element__image').setAttribute("alt", item.alt);
+// Закрытие на оверлей третьего попапа
+const popupImageCloseByClickOnOverlay = (event) => {
+    if (event.target != event.currentTarget) {
+        return
+    }
+    togglePopup(popupImage);
+}
+popupImage.addEventListener('click', popupImageCloseByClickOnOverlay)
 
-//      //говорим, что хотим добавить карточку в начало, а не в конец
-//      cardsListElement.prepend(card);
-//      //ставим карточкам лайки
-//      const like = document.querySelector('.element__like');
-//     like.addEventListener('click', evt => evt.target.classList.toggle('element__like_theme_dark')
-//      );
-//  }
-//  initialCards.forEach(function (item) {
-//      addCard(item)
-// });
 
 
 //Отдельно функция создания карточки:
@@ -170,7 +192,6 @@ popupEditOpen.addEventListener('click', () => {
     nameInput.classList.remove('form__error_active');
     jobInput.classList.remove('form__error_active');
 
-
     const buttonElement = document.querySelector('.popup__submit');
     buttonElement.classList.remove('popup__submit_inactive')
     buttonElement.removeAttribute('disabled', true)
@@ -191,10 +212,6 @@ popupAddOpen.addEventListener('click', () => {
     togglePopup(popupAdd);
     nameInputCard.value = '';
     linkInput.value = '';
-
-    // const buttonElement = document.querySelector('.popup__submit'); // находим кнопку
-    // buttonElement.classList.add('popup__submit_inactive'); // добавляем кнопке класс inactive
-
 });
 
 popupEditClose.addEventListener('click', () => openUserPopup(popupEdit));
@@ -224,16 +241,20 @@ function popupZoomImage(item) {
 // функция "Показать ошибку"
 const showInputError = (formElement, inputElement, errorMessage) => {
     const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
+    const errorInput = inputElement.querySelector('.form__input-container');
     errorElement.textContent = errorMessage;
     errorElement.classList.add('form__error_active');
+    //errorInput.classList.add('form__input-container_error');
 
 }
 
 // функция "Скрыть ошибку"
 const hideInputError = (formElement, inputElement) => {
     const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
+    const errorInput = inputElement.querySelector('.form__input-container');
     errorElement.textContent = '';
     errorElement.classList.remove('form__error_active');
+    //errorInput.classList.remove('form__input-container_error');
 }
 
 // функция будет показывать и убирать ошибку
