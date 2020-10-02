@@ -45,7 +45,7 @@
             <div class="popup__content">
                 <h2 class="popup__title">Редактировать профиль</h2>
                 <div class="popup__form-container">
-                    <form class="form" name="informationForm" novalidate>
+                    <form class="form form__edit" name="informationForm" novalidate>
                         <fieldset class="form__fieldset">
                             <input type="text" name="name" id="nameProfile"
                                 class="form__input-container form__input-container_name" placeholder="Имя" required
@@ -84,7 +84,7 @@
                         </fieldset>
 
 
-                        <button class="button popup__submit popup__submit_inactive">Создать</button>
+                        <button class="button popup__submit popup__submitAdd popup__submit_inactive">Создать</button>
                     </form>
                 </div>
             </div>
@@ -114,6 +114,8 @@
     </template>
 
     <script src="./scripts/index.js"></script>
+    <script src="./scripts/validate.js"></script>
+    <script src="./scripts/object.js"></script>
 </body>
 
 
