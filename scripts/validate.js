@@ -61,8 +61,8 @@ const toggleButtonState = (inputList, buttonElement) => {
 
 //функция, которая устанавливает обработчики событий
 const setEventListeners = (formElement) => {
-    const inputList = Array.from(formElement.querySelectorAll('.form__input-container')); // находим все инпуты
-    const buttonElement = formElement.querySelector('.popup__submit');
+    const inputList = Array.from(formElement.querySelectorAll(config.inputElement)); // находим все инпуты
+    const buttonElement = formElement.querySelector(config.buttonElement);
 
     inputList.forEach((inputElement) => {
         inputElement.addEventListener('input', () => {
@@ -74,7 +74,7 @@ const setEventListeners = (formElement) => {
 
 //создаем функцию валидации
 const enableValidation = () => {
-    const formList = Array.from(document.querySelectorAll('.form')); // находим все формы в документе
+    const formList = Array.from(document.querySelectorAll(config.formElement)); // находим все формы в документе
 
     //прописываем обработчик для каждой формы, чтобы страница не перезагружалась каждый раз при нажатии на Submit
     formList.forEach((formElement) => {
