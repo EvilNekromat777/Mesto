@@ -86,4 +86,4 @@ const enableValidation = () => {
     });
 };
 
-enableValidation();
+enableValidation(config);

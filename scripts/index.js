@@ -1,3 +1,5 @@
+
+
 const profile = document.querySelector('.profile');
 const formElement = document.querySelector('.form__edit');
 const nameInput = formElement.querySelector('.form__input-container_name');
@@ -15,7 +17,6 @@ const nameProfileError = document.getElementById(`nameProfile-error`);
 const jobProfileError = document.getElementById(`jobProfile-error`);
 const nameCardError = document.getElementById(`nameCard-error`);
 const linkCardError = document.getElementById(`linkCard-error`);
-//const buttonElement = document.querySelector('.popup__submit');
 
 
 // Popups
@@ -32,6 +33,40 @@ const popupImageClose = popupImage.querySelector('.popup__close');
 const popupEditOpen = document.querySelector('.button_edit_open');
 const popupAddOpen = document.querySelector('.button_add_open');
 const popupImageOpen = document.querySelector('.element__image');
+
+
+//Отдельно функция создания карточки из Темплейта:
+function createCard(item) {
+    // копируем все содержимое Template
+    const card = cardsTemplateElement.content.cloneNode(true);
+    //слушатель - при нажатии на иконку корзины, сработает функция deleteCard (удаление карточки)
+    card.querySelector('.element__delete').addEventListener('click', deleteCard);
+
+    const elementImage = card.querySelector('.element__image');
+    //слушатель - при нажатии на картинку, сработает функция popupZoomImage (увеличение картинки в попапе)
+    elementImage.addEventListener('click', () => popupZoomImage(item));
+    //ставим карточкам лайки
+    card.querySelector('.element__like').addEventListener('click', evt => evt.target.classList.toggle('element__like_theme_dark'));
+    //берем данные из массива
+    card.querySelector('.element__title').textContent = item.name;
+    elementImage.setAttribute("src", item.link);
+    elementImage.setAttribute("alt", item.alt);
+    //возвращаем созданную карточку
+    return card;
+}
+
+//И отдельно функция добавления карточки из Темплейта в контейнер
+function addCard(cardsListElement, card) {
+    //добавление карточки в начало списка
+    cardsListElement.prepend(card);
+};
+initialCards.forEach(function (item) {
+    createCard(item);
+    addCard(cardsListElement, createCard(item));
+});
+
+
+
 
 // Функция открытия попапа
 const openPopup = function (popup) {
@@ -126,6 +161,10 @@ popupAddOpen.addEventListener('click', () => {
     openPopup(popupAdd);
     nameInputCard.value = '';
     linkInput.value = '';
+
+    const buttonElementAdd = document.querySelector('.popup__submitAdd');
+    buttonElementAdd.classList.add('popup__submit_inactive')
+    buttonElementAdd.addAttribute('disabled', true)
 });
 
 popupEditClose.addEventListener('click', () => openUserPopup(popupEdit));
