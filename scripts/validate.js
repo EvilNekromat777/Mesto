@@ -4,12 +4,12 @@ const config = {
     inputElement: '.form__input-container',
     buttonElement: '.popup__submit',
     inputErrorClass: 'form__input-container_error',
-    errorClass: 'form__error_active'
+    errorClass: 'form__error_active',
+    inactiveButtonClass: 'popup__submit_inactive'
 };
 
-
 // функция "Показать ошибку"
-const showInputError = (formElement, inputElement, errorMessage) => {
+const showInputError = (config, formElement, inputElement, errorMessage) => {
     const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
     errorElement.textContent = errorMessage;
     errorElement.classList.add(config.errorClass);
@@ -17,7 +17,7 @@ const showInputError = (formElement, inputElement, errorMessage) => {
 }
 
 // функция "Скрыть ошибку"
-const hideInputError = (formElement, inputElement) => {
+const hideInputError = (config, formElement, inputElement) => {
     const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
     errorElement.textContent = '';
     errorElement.classList.remove(config.errorClass);
@@ -30,9 +30,9 @@ const checkInputValidity = (formElement, inputElement) => {
 
     if (!isInputValid) {
         const errorMessage = inputElement.validationMessage;
-        showInputError(formElement, inputElement, errorMessage);
+        showInputError(config, formElement, inputElement, errorMessage);
     } else {
-        hideInputError(formElement, inputElement);
+        hideInputError(config, formElement, inputElement);
     }
 }
 
@@ -52,15 +52,17 @@ const toggleButtonState = (inputList, buttonElement) => {
     // Если есть хотя бы один невалидный инпут
     if (hasInvalidInput(inputList)) {
         // сделай кнопку неактивной
-        buttonElement.classList.add('popup__submit_inactive');
+        buttonElement.classList.add(config.inactiveButtonClass);
+        buttonElement.disabled = true;
     } else {
         // иначе сделай кнопку активной
-        buttonElement.classList.remove('popup__submit_inactive');
+        buttonElement.classList.remove(config.inactiveButtonClass);
+        buttonElement.disabled = false;
     }
 };
 
 //функция, которая устанавливает обработчики событий
-const setEventListeners = (formElement) => {
+const setEventListeners = (config, formElement) => {
     const inputList = Array.from(formElement.querySelectorAll(config.inputElement)); // находим все инпуты
     const buttonElement = formElement.querySelector(config.buttonElement);
 
@@ -73,7 +75,7 @@ const setEventListeners = (formElement) => {
 };
 
 //создаем функцию валидации
-const enableValidation = () => {
+const enableValidation = (config) => {
     const formList = Array.from(document.querySelectorAll(config.formElement)); // находим все формы в документе
 
     //прописываем обработчик для каждой формы, чтобы страница не перезагружалась каждый раз при нажатии на Submit
@@ -82,7 +84,7 @@ const enableValidation = () => {
             event.preventDefault(); //останавливаем стандартное поведение браузера при нажатии на Submit
         });
 
-        setEventListeners(formElement);
+        setEventListeners(config, formElement);
     });
 };
 

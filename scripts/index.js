@@ -164,7 +164,7 @@ popupAddOpen.addEventListener('click', () => {
 
     const buttonElementAdd = document.querySelector('.popup__submitAdd');
     buttonElementAdd.classList.add('popup__submit_inactive')
-    buttonElementAdd.addAttribute('disabled', true)
+    buttonElementAdd.setAttribute('disabled', true)
 });
 
 popupEditClose.addEventListener('click', () => openUserPopup(popupEdit));
