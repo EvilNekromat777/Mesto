@@ -190,3 +190,5 @@ function popupZoomImage(item) {
     openPopup(popupImage)
 };
 
+import { initialCards } from './Card.js'
+import { config, showInputError, hideInputError, checkInputValidity, hasInvalidInput, toggleButtonState, setEventListeners, enableValidation } from './FormValidator.js'

@@ -1,5 +1,4 @@
-
-const config = {
+export const config = {
     formElement: '.form',
     inputElement: '.form__input-container',
     buttonElement: '.popup__submit',
@@ -9,7 +8,7 @@ const config = {
 };
 
 // функция "Показать ошибку"
-const showInputError = (config, formElement, inputElement, errorMessage) => {
+export const showInputError = (config, formElement, inputElement, errorMessage) => {
     const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
     errorElement.textContent = errorMessage;
     errorElement.classList.add(config.errorClass);
@@ -17,7 +16,7 @@ const showInputError = (config, formElement, inputElement, errorMessage) => {
 }
 
 // функция "Скрыть ошибку"
-const hideInputError = (config, formElement, inputElement) => {
+export const hideInputError = (config, formElement, inputElement) => {
     const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
     errorElement.textContent = '';
     errorElement.classList.remove(config.errorClass);
@@ -25,7 +24,7 @@ const hideInputError = (config, formElement, inputElement) => {
 }
 
 // функция будет показывать и убирать ошибку
-const checkInputValidity = (formElement, inputElement) => {
+export const checkInputValidity = (formElement, inputElement) => {
     const isInputValid = inputElement.validity.valid
 
     if (!isInputValid) {
@@ -37,7 +36,7 @@ const checkInputValidity = (formElement, inputElement) => {
 }
 
 // Функция принимает массив полей
-const hasInvalidInput = (inputList) => {
+export const hasInvalidInput = (inputList) => {
     // проходим по этому массиву методом some
     return inputList.some((inputElement) => {
         // Если поле не валидно, колбэк вернёт true
@@ -48,7 +47,7 @@ const hasInvalidInput = (inputList) => {
 };
 
 // Валидация кнопки
-const toggleButtonState = (inputList, buttonElement) => {
+export const toggleButtonState = (inputList, buttonElement) => {
     // Если есть хотя бы один невалидный инпут
     if (hasInvalidInput(inputList)) {
         // сделай кнопку неактивной
@@ -62,7 +61,7 @@ const toggleButtonState = (inputList, buttonElement) => {
 };
 
 //функция, которая устанавливает обработчики событий
-const setEventListeners = (config, formElement) => {
+export const setEventListeners = (config, formElement) => {
     const inputList = Array.from(formElement.querySelectorAll(config.inputElement)); // находим все инпуты
     const buttonElement = formElement.querySelector(config.buttonElement);
 
@@ -75,7 +74,7 @@ const setEventListeners = (config, formElement) => {
 };
 
 //создаем функцию валидации
-const enableValidation = (config) => {
+export const enableValidation = (config) => {
     const formList = Array.from(document.querySelectorAll(config.formElement)); // находим все формы в документе
 
     //прописываем обработчик для каждой формы, чтобы страница не перезагружалась каждый раз при нажатии на Submit
