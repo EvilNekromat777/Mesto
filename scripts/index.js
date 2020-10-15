@@ -1,4 +1,4 @@
-
+import { initialCards, Card } from './Card.js'
 
 const profile = document.querySelector('.profile');
 const formElement = document.querySelector('.form__edit');
@@ -36,34 +36,34 @@ const popupImageOpen = document.querySelector('.element__image');
 
 
 //Отдельно функция создания карточки из Темплейта:
-function createCard(item) {
-    // копируем все содержимое Template
-    const card = cardsTemplateElement.content.cloneNode(true);
-    //слушатель - при нажатии на иконку корзины, сработает функция deleteCard (удаление карточки)
-    card.querySelector('.element__delete').addEventListener('click', deleteCard);
+// function createCard(item) {
+//     // копируем все содержимое Template
+//     const card = cardsTemplateElement.content.cloneNode(true);
+//     //слушатель - при нажатии на иконку корзины, сработает функция deleteCard (удаление карточки)
+//     card.querySelector('.element__delete').addEventListener('click', deleteCard);
 
-    const elementImage = card.querySelector('.element__image');
-    //слушатель - при нажатии на картинку, сработает функция popupZoomImage (увеличение картинки в попапе)
-    elementImage.addEventListener('click', () => popupZoomImage(item));
-    //ставим карточкам лайки
-    card.querySelector('.element__like').addEventListener('click', evt => evt.target.classList.toggle('element__like_theme_dark'));
-    //берем данные из массива
-    card.querySelector('.element__title').textContent = item.name;
-    elementImage.setAttribute("src", item.link);
-    elementImage.setAttribute("alt", item.alt);
-    //возвращаем созданную карточку
-    return card;
-}
+//     const elementImage = card.querySelector('.element__image');
+//     //слушатель - при нажатии на картинку, сработает функция popupZoomImage (увеличение картинки в попапе)
+//     elementImage.addEventListener('click', () => popupZoomImage(item));
+//     //ставим карточкам лайки
+//     card.querySelector('.element__like').addEventListener('click', evt => evt.target.classList.toggle('element__like_theme_dark'));
+//     //берем данные из массива
+//     card.querySelector('.element__title').textContent = item.name;
+//     elementImage.setAttribute("src", item.link);
+//     elementImage.setAttribute("alt", item.alt);
+//     //возвращаем созданную карточку
+//     return card;
+// }
 
 //И отдельно функция добавления карточки из Темплейта в контейнер
-function addCard(cardsListElement, card) {
-    //добавление карточки в начало списка
-    cardsListElement.prepend(card);
-};
-initialCards.forEach(function (item) {
-    createCard(item);
-    addCard(cardsListElement, createCard(item));
-});
+// function addCard(cardsListElement, card) {
+//     //добавление карточки в начало списка
+//     cardsListElement.prepend(card);
+// };
+// initialCards.forEach(function (item) {
+//     createCard(item);
+//     addCard(cardsListElement, createCard(item));
+// });
 
 
 
@@ -190,5 +190,5 @@ function popupZoomImage(item) {
     openPopup(popupImage)
 };
 
-import { initialCards } from './Card.js'
+
 import { config, showInputError, hideInputError, checkInputValidity, hasInvalidInput, toggleButtonState, setEventListeners, enableValidation } from './FormValidator.js'
