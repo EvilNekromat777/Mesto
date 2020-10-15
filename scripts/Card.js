@@ -37,6 +37,8 @@ export class Card {
         this._name = data.name;
         this._link = data.link;
         this._templateSelector = templateSelector;
+
+
     }
     _getTemplate() {
         const cardElement = document
@@ -49,10 +51,22 @@ export class Card {
 
     generateCard() {
         this._element = this._getTemplate();
+        this._setEventListeners();
+
         this._element.querySelector('.element__image').src = this._link;
         this._element.querySelector('.element__title').textContent = this._name;
 
         return this._element;
+    }
+
+    _setEventListeners() {
+        this._element.querySelector('.element__like').addEventListener('click', () => {
+            this._like();
+        });
+    }
+
+    _like() {
+        this._element.querySelector('.element__like').classList.toggle('element__like_theme_dark');
     }
 }
 
