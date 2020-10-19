@@ -1,3 +1,16 @@
+
+import { popupImageImg, popupImage } from './index.js'
+// export const popupElement = document.querySelector('.popup_image');
+
+
+// export const popupImage = document.querySelector('.popup__zoom-image');
+
+//const popupCloseButton = document.querySelector('.popup__close');
+// export const popupImageClose = document.querySelector('.popup__close_image');
+const popupImageText = document.querySelector('.popup__zoom-title');
+
+
+
 export const initialCards = [
     {
         name: 'Архыз',
@@ -36,10 +49,41 @@ export class Card {
     constructor(data, templateSelector) {
         this._name = data.name;
         this._link = data.link;
+        this._image = data.image;
         this._templateSelector = templateSelector;
-
-
     }
+
+    _handleOpenPopup() {
+        popupImageImg.src = this._link;
+        popupImageText.textContent = this._name;
+        popupImage.classList.add('popup_opened');
+    }
+
+
+    // _handleClosePopup() {
+    //     popupImage.src = '';
+    //     popupElement.classList.remove('popup_opened');
+    // }
+
+    _setEventListeners() {
+        this._element.querySelector('.element__like').addEventListener('click', () => {
+            this._like();
+        });
+        this._element.querySelector('.element__delete').addEventListener('click', () => {
+            this._deleteCard();
+        });
+
+        this._element.querySelector('.element__image').addEventListener('click', () => {
+            this._handleOpenPopup();
+        });
+
+        // popupImageClose.addEventListener('click', () => {
+        //     this._handleClosePopup();
+        // });
+    }
+
+
+
     _getTemplate() {
         const cardElement = document
             .querySelector(this._templateSelector)
@@ -48,7 +92,6 @@ export class Card {
             .cloneNode(true);
         return cardElement;
     }
-
     generateCard() {
         this._element = this._getTemplate();
         this._setEventListeners();
@@ -58,17 +101,15 @@ export class Card {
 
         return this._element;
     }
-
-    _setEventListeners() {
-        this._element.querySelector('.element__like').addEventListener('click', () => {
-            this._like();
-        });
-    }
-
     _like() {
         this._element.querySelector('.element__like').classList.toggle('element__like_theme_dark');
     }
+    _deleteCard() {
+        this._element.remove();
+    }
 }
+
+
 
 initialCards.forEach((item) => {
     const card = new Card(item, '.card-template_type_default');

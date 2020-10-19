@@ -1,4 +1,6 @@
+
 import { initialCards, Card } from './Card.js'
+import { config, showInputError, hideInputError, checkInputValidity, hasInvalidInput, toggleButtonState, setEventListeners, enableValidation } from './FormValidator.js'
 
 const profile = document.querySelector('.profile');
 const formElement = document.querySelector('.form__edit');
@@ -11,7 +13,7 @@ const cardsTemplateElement = document.querySelector('.cards-template');
 const formAdd = document.querySelector('.form_addCard');
 const nameInputCard = formAdd.querySelector('.form__input-container_addCard_name');
 const linkInput = formAdd.querySelector('.form__input-container_addCard_link');
-const popupImageImg = document.querySelector('.popup__zoom-image');
+export const popupImageImg = document.querySelector('.popup__zoom-image');
 const popupImageText = document.querySelector('.popup__zoom-title');
 const nameProfileError = document.getElementById(`nameProfile-error`);
 const jobProfileError = document.getElementById(`jobProfile-error`);
@@ -22,7 +24,7 @@ const linkCardError = document.getElementById(`linkCard-error`);
 // Popups
 const popupEdit = document.querySelector('.popup_edit');
 const popupAdd = document.querySelector('.popup_add');
-const popupImage = document.querySelector('.popup_image');
+export const popupImage = document.querySelector('.popup_image');
 
 // Popups Close Button
 const popupEditClose = popupEdit.querySelector('.popup__close');
@@ -35,7 +37,7 @@ const popupAddOpen = document.querySelector('.button_add_open');
 const popupImageOpen = document.querySelector('.element__image');
 
 
-//Отдельно функция создания карточки из Темплейта:
+// //Отдельно функция создания карточки из Темплейта:
 // function createCard(item) {
 //     // копируем все содержимое Template
 //     const card = cardsTemplateElement.content.cloneNode(true);
@@ -55,7 +57,7 @@ const popupImageOpen = document.querySelector('.element__image');
 //     return card;
 // }
 
-//И отдельно функция добавления карточки из Темплейта в контейнер
+// //И отдельно функция добавления карточки из Темплейта в контейнер
 // function addCard(cardsListElement, card) {
 //     //добавление карточки в начало списка
 //     cardsListElement.prepend(card);
@@ -171,24 +173,22 @@ popupEditClose.addEventListener('click', () => openUserPopup(popupEdit));
 popupAddClose.addEventListener('click', () => closePopup(popupAdd));
 popupImageClose.addEventListener('click', () => closePopup(popupImage));
 
-//функция удаления карточки
-function deleteCard(e) {
-    //добавляем event на карточку, чтобы отслеживать клик по любой рандомной карточке
-    const card = e.target.closest('.element');
-    //когда event отследит клик, он должен  удалить карточку, по которой он был сделан
-    card.remove()
-};
+// //функция удаления карточки
+// function deleteCard(e) {
+//     //добавляем event на карточку, чтобы отслеживать клик по любой рандомной карточке
+//     const card = e.target.closest('.element');
+//     //когда event отследит клик, он должен  удалить карточку, по которой он был сделан
+//     card.remove()
+// };
 
-//функция увеличения картинки в попапе
-function popupZoomImage(item) {
-    const image = item.link;
-    const place = item.name;
+// //функция увеличения картинки в попапе
+// function popupZoomImage(item) {
+//     const image = item.link;
+//     const place = item.name;
 
-    popupImageImg.src = image
-    popupImageText.textContent = place
+//     popupImageImg.src = image
+//     popupImageText.textContent = place
 
-    openPopup(popupImage)
-};
+//     openPopup(popupImage)
+// };
 
-
-import { config, showInputError, hideInputError, checkInputValidity, hasInvalidInput, toggleButtonState, setEventListeners, enableValidation } from './FormValidator.js'
