@@ -4,4 +4,8 @@
     border-radius: 10px 10px 0 0;
     flex-grow: 3;
     cursor: pointer;
+    object-fit: cover;
+}
+.element__image:hover {
+    opacity: .8;
 }

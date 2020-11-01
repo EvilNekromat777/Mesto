@@ -1,7 +1,5 @@
 
-import { popupImageImg, popupImage } from './index.js'
-
-const popupImageText = document.querySelector('.popup__zoom-title');
+import { popupImageImg, popupImage, popupImageText } from './index.js'
 
 
 
@@ -91,17 +89,6 @@ export class Card {
     }
 }
 
-
-
-
-
-
-initialCards.forEach((item) => {
-    const card = new Card(item, '.card-template_type_default');
-    const cardElement = card.generateCard();
-    const cardsListElement = document.querySelector('.elements');
-    cardsListElement.prepend(cardElement);
-});
 
 
 

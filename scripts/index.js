@@ -24,7 +24,7 @@ const formAdd = document.querySelector('.form_addCard');
 const nameInputCard = formAdd.querySelector('.form__input-container_addCard_name');
 const linkInput = formAdd.querySelector('.form__input-container_addCard_link');
 export const popupImageImg = document.querySelector('.popup__zoom-image');
-const popupImageText = document.querySelector('.popup__zoom-title');
+export const popupImageText = document.querySelector('.popup__zoom-title');
 const nameProfileError = document.getElementById(`nameProfile-error`);
 const jobProfileError = document.getElementById(`jobProfile-error`);
 const nameCardError = document.getElementById(`nameCard-error`);
@@ -67,20 +67,20 @@ const popupImageOpen = document.querySelector('.element__image');
 //     return card;
 // }
 
-function createCard(item) {
-    const card = new Card(item, '#card-template');
-    return card.generateCard();
-};
+// function createCard(item) {
+//     const card = new Card(item, '#card-template');
+//     return card.generateCard();
+// };
 
-//И отдельно функция добавления карточки из Темплейта в контейнер
-function addCard(cardsListElement, card) {
-    //добавление карточки в начало списка
-    cardsListElement.prepend(card);
-};
-initialCards.forEach(function (item) {
-    createCard(item);
-    addCard(cardsListElement, createCard(item));
-});
+// //И отдельно функция добавления карточки из Темплейта в контейнер
+// function addCard(cardsListElement, card) {
+//     //добавление карточки в начало списка
+//     cardsListElement.prepend(card);
+// };
+// initialCards.forEach(function (item) {
+//     createCard(item);
+//     addCard(cardsListElement, createCard(item));
+// });
 
 
 
@@ -134,30 +134,50 @@ function formSubmitHandler(evt) {
 };
 
 
+initialCards.forEach((item) => {
+    const card = new Card(item, '.card-template');
+    const cardElement = card.generateCard();
+    const cardsListElement = document.querySelector('.elements');
+    cardsListElement.prepend(cardElement);
+});
 
 
-//функция добавления новых карточек
+// //функция добавления новых карточек
+// function renderCard(evt) {
+//     //останавливаемСтандартноеПоведениеБраузера
+//     evt.preventDefault()
+//     //const имяНовойКарточки = беремЗначениеИзПоляА
+//     const newCardName = nameInputCard.value;
+//     //const картинкаНовойКарточки = беремЗначениеИзПоляБ
+//     const newCardImage = linkInput.value;
+//     //const новаяКарточка = { name: имяНовойКарточки, link: картинкаНовойКарточки }
+//     const newCard = { name: newCardName, link: newCardImage };
+//     //функцияКотораяСоздаетКарточку(новаяКарточка)
+//     // addCard(cardsListElement, createCard(newCard));
+//     addCard(cardsListElement, () => { createCard(newCard) });
+
+//     //закрываемПопап()
+//     closePopup(popupAdd);
+
+// }
+
+// //слушатель - при нажатии на кнопку "Сохранить", срабатывает функция formSubmitHandler
+// formEdit.addEventListener('submit', formSubmitHandler);
+// // formAdd.addEventListener('submit', renderCard);
+// formAdd.addEventListener('submit', () => { renderCard(evt) });
+
+
+
+
 function renderCard(evt) {
-    //останавливаемСтандартноеПоведениеБраузера
-    evt.preventDefault()
-    //const имяНовойКарточки = беремЗначениеИзПоляА
-    const newCardName = nameInputCard.value;
-    //const картинкаНовойКарточки = беремЗначениеИзПоляБ
-    const newCardImage = linkInput.value;
-    //const новаяКарточка = { name: имяНовойКарточки, link: картинкаНовойКарточки }
-    const newCard = { name: newCardName, link: newCardImage };
-    //функцияКотораяСоздаетКарточку(новаяКарточка)
-    addCard(cardsListElement, createCard(newCard));
-
-    //закрываемПопап()
+    evt.preventDefault();
+    const newCard = new Card({ name: nameInputCard.value, link: linkInput.value }, '.card-template');
+    const newCardElement = newCard.generateCard();
+    cardsListElement.prepend(newCardElement);
     closePopup(popupAdd);
-
 }
-
-//слушатель - при нажатии на кнопку "Сохранить", срабатывает функция formSubmitHandler
-formEdit.addEventListener('submit', formSubmitHandler);
-// formAdd.addEventListener('submit', renderCard);
-formAdd.addEventListener('submit', () => { renderCard(evt) });
+formEdit.addEventListener('submit', (evt) => { formSubmitHandler(evt) });
+formAdd.addEventListener('submit', (evt) => { renderCard(evt) });
 
 
 popupEditOpen.addEventListener('click', () => {
@@ -215,6 +235,5 @@ formEditValidator.enableValidation()
 const formAddValidator = new FormValidator(config, formAdd);
 formAddValidator.enableValidation()
 
-const newCard = ({ name: newCardName, link: newCardImage }, cardsTemplateElement);
-addCard(cardsListElement, createCard(newCard));
+
 
