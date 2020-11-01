@@ -1,12 +1,6 @@
 
 import { popupImageImg, popupImage } from './index.js'
-// export const popupElement = document.querySelector('.popup_image');
 
-
-// export const popupImage = document.querySelector('.popup__zoom-image');
-
-//const popupCloseButton = document.querySelector('.popup__close');
-// export const popupImageClose = document.querySelector('.popup__close_image');
 const popupImageText = document.querySelector('.popup__zoom-title');
 
 
@@ -49,7 +43,6 @@ export class Card {
     constructor(data, templateSelector) {
         this._name = data.name;
         this._link = data.link;
-        this._image = data.image;
         this._templateSelector = templateSelector;
     }
 
@@ -58,12 +51,6 @@ export class Card {
         popupImageText.textContent = this._name;
         popupImage.classList.add('popup_opened');
     }
-
-
-    // _handleClosePopup() {
-    //     popupImage.src = '';
-    //     popupElement.classList.remove('popup_opened');
-    // }
 
     _setEventListeners() {
         this._element.querySelector('.element__like').addEventListener('click', () => {
@@ -76,13 +63,7 @@ export class Card {
         this._element.querySelector('.element__image').addEventListener('click', () => {
             this._handleOpenPopup();
         });
-
-        // popupImageClose.addEventListener('click', () => {
-        //     this._handleClosePopup();
-        // });
     }
-
-
 
     _getTemplate() {
         const cardElement = document
@@ -91,6 +72,7 @@ export class Card {
             .querySelector('.element')
             .cloneNode(true);
         return cardElement;
+
     }
     generateCard() {
         this._element = this._getTemplate();
@@ -108,6 +90,9 @@ export class Card {
         this._element.remove();
     }
 }
+
+
+
 
 
 

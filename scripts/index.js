@@ -1,15 +1,25 @@
 
 import { initialCards, Card } from './Card.js'
-import { config, showInputError, hideInputError, checkInputValidity, hasInvalidInput, toggleButtonState, setEventListeners, enableValidation } from './FormValidator.js'
+import FormValidator from './FormValidator.js'
+
+const config = {
+    formElement: '.form',
+    inputElement: '.form__input-container',
+    buttonElement: '.popup__submit',
+    inputErrorClass: 'form__input-container_error',
+    errorClass: 'form__error_active',
+    inactiveButtonClass: 'popup__submit_inactive'
+};
 
 const profile = document.querySelector('.profile');
-const formElement = document.querySelector('.form__edit');
-const nameInput = formElement.querySelector('.form__input-container_name');
-const jobInput = formElement.querySelector('.form__input-container_job');
+const formEdit = document.querySelector('.form__edit');
+const formElement = document.querySelector('.form');
+const nameInput = formEdit.querySelector('.form__input-container_name');
+const jobInput = formEdit.querySelector('.form__input-container_job');
 const name = profile.querySelector('.profile__title');
 const job = profile.querySelector('.profile__subtitle');
 const cardsListElement = document.querySelector('.elements');
-const cardsTemplateElement = document.querySelector('.cards-template');
+const cardsTemplateElement = document.querySelector('.card-template');
 const formAdd = document.querySelector('.form_addCard');
 const nameInputCard = formAdd.querySelector('.form__input-container_addCard_name');
 const linkInput = formAdd.querySelector('.form__input-container_addCard_link');
@@ -57,15 +67,20 @@ const popupImageOpen = document.querySelector('.element__image');
 //     return card;
 // }
 
-// //И отдельно функция добавления карточки из Темплейта в контейнер
-// function addCard(cardsListElement, card) {
-//     //добавление карточки в начало списка
-//     cardsListElement.prepend(card);
-// };
-// initialCards.forEach(function (item) {
-//     createCard(item);
-//     addCard(cardsListElement, createCard(item));
-// });
+function createCard(item) {
+    const card = new Card(item, '#card-template');
+    return card.generateCard();
+};
+
+//И отдельно функция добавления карточки из Темплейта в контейнер
+function addCard(cardsListElement, card) {
+    //добавление карточки в начало списка
+    cardsListElement.prepend(card);
+};
+initialCards.forEach(function (item) {
+    createCard(item);
+    addCard(cardsListElement, createCard(item));
+});
 
 
 
@@ -118,8 +133,7 @@ function formSubmitHandler(evt) {
     closePopup(popupEdit);
 };
 
-//слушатель - при нажатии на кнопку "Сохранить", срабатывает функция formSubmitHandler
-formElement.addEventListener('submit', formSubmitHandler);
+
 
 
 //функция добавления новых карточек
@@ -140,8 +154,11 @@ function renderCard(evt) {
 
 }
 
-//слушатель: при нажатии на кнопку сработает функция renderCard
-formAdd.addEventListener('submit', renderCard);
+//слушатель - при нажатии на кнопку "Сохранить", срабатывает функция formSubmitHandler
+formEdit.addEventListener('submit', formSubmitHandler);
+// formAdd.addEventListener('submit', renderCard);
+formAdd.addEventListener('submit', () => { renderCard(evt) });
+
 
 popupEditOpen.addEventListener('click', () => {
     nameProfileError.textContent = '';
@@ -191,4 +208,13 @@ popupImageClose.addEventListener('click', () => closePopup(popupImage));
 
 //     openPopup(popupImage)
 // };
+
+const formEditValidator = new FormValidator(config, formEdit);
+formEditValidator.enableValidation()
+
+const formAddValidator = new FormValidator(config, formAdd);
+formAddValidator.enableValidation()
+
+const newCard = ({ name: newCardName, link: newCardImage }, cardsTemplateElement);
+addCard(cardsListElement, createCard(newCard));
 
