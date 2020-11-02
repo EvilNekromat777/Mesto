@@ -98,7 +98,7 @@ function closePopup(popup) {
 }
 
 // Закрытие попапа на Esc
-function keyHandler(evt) {
+export function keyHandler(evt) {
     if (evt.key === 'Escape') {
         const openedPopup = document.querySelector('.popup_opened');
         closePopup(openedPopup);

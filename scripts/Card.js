@@ -1,5 +1,5 @@
 
-import { popupImageImg, popupImage, popupImageText } from './index.js'
+import { popupImageImg, popupImage, popupImageText, keyHandler } from './index.js'
 
 
 
@@ -48,7 +48,13 @@ export class Card {
         popupImageImg.src = this._link;
         popupImageText.textContent = this._name;
         popupImage.classList.add('popup_opened');
+        document.addEventListener('keydown', keyHandler);
     }
+
+    // _handleClosePopup() {
+    //     popupImage.classList.remove('popup_opened');
+    //     document.removeEventListener('keydown', keyHandler);
+    // }
 
     _setEventListeners() {
         this._element.querySelector('.element__like').addEventListener('click', () => {
@@ -61,6 +67,11 @@ export class Card {
         this._element.querySelector('.element__image').addEventListener('click', () => {
             this._handleOpenPopup();
         });
+
+        // this._element.querySelector('.popup__close').addEventListener('click', () => {
+        //     this._handleClosePopup();
+        // });
+
     }
 
     _getTemplate() {
@@ -74,10 +85,11 @@ export class Card {
     }
     generateCard() {
         this._element = this._getTemplate();
-        this._setEventListeners();
 
         this._element.querySelector('.element__image').src = this._link;
         this._element.querySelector('.element__title').textContent = this._name;
+
+        this._setEventListeners();
 
         return this._element;
     }
