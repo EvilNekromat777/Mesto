@@ -11,30 +11,30 @@ export default class FormValidator {
 
 
     // функция "Показать ошибку"
-    _showInputError(formElement, inputElement, errorMessage) {
-        const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
+    _showInputError(inputElement, errorMessage) {
+        const errorElement = this._formElement.querySelector(`#${inputElement.id}-error`);
         errorElement.textContent = errorMessage;
         errorElement.classList.add(this._config.errorClass);
         inputElement.classList.add(this._config.inputErrorClass);
     }
 
     // функция "Скрыть ошибку"
-    _hideInputError(formElement, inputElement) {
-        const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
+    _hideInputError(inputElement) {
+        const errorElement = this._formElement.querySelector(`#${inputElement.id}-error`);
         errorElement.textContent = '';
         errorElement.classList.remove(this._config.errorClass);
         inputElement.classList.remove(this._config.inputErrorClass);
     }
 
     // функция будет показывать и убирать ошибку
-    _checkInputValidity(formElement, inputElement) {
+    _checkInputValidity(inputElement) {
         const isInputValid = inputElement.validity.valid
 
         if (!isInputValid) {
             const errorMessage = inputElement.validationMessage;
-            this._showInputError(formElement, inputElement, errorMessage);
+            this._showInputError(inputElement, errorMessage);
         } else {
-            this._hideInputError(formElement, inputElement);
+            this._hideInputError(inputElement);
         }
     }
 
@@ -64,13 +64,13 @@ export default class FormValidator {
     };
 
     //функция, которая устанавливает обработчики событий
-    _setEventListeners(formElement) {
-        const inputList = Array.from(formElement.querySelectorAll(this._config.inputElement)); // находим все инпуты
-        const buttonElement = formElement.querySelector(this._config.buttonElement);
+    _setEventListeners() {
+        const inputList = Array.from(this._formElement.querySelectorAll(this._config.inputElement)); // находим все инпуты
+        const buttonElement = this._formElement.querySelector(this._config.buttonElement);
 
         inputList.forEach((inputElement) => {
             inputElement.addEventListener('input', () => {
-                this._checkInputValidity(formElement, inputElement);
+                this._checkInputValidity(inputElement);
                 this._toggleButtonState(inputList, buttonElement);
             });
         });
@@ -78,16 +78,11 @@ export default class FormValidator {
 
     //создаем функцию валидации
     enableValidation = () => {
-        // const formList = Array.from(document.querySelectorAll(this._config.formElement)); // находим все формы в документе
-
-        //прописываем обработчик для каждой формы, чтобы страница не перезагружалась каждый раз при нажатии на Submit
-        // formList.forEach((formElement) => {
         this._formElement.addEventListener('submit', (event) => {
             event.preventDefault(); //останавливаем стандартное поведение браузера при нажатии на Submit
         });
 
         this._setEventListeners(this._formElement);
     };
-    // };
 
 }
